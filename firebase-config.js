@@ -1,12 +1,14 @@
 // ✅ วาง Firebase config ของโปรเจกต์คุณตรงนี้ (หาได้ที่ Firebase console → Project settings → Your apps)
 // หมายเหตุ: firebaseConfig "ไม่ใช่ความลับ" แต่ Firestore Rules ต้องตั้งให้ดีเพื่อความปลอดภัย
-export const firebaseConfig = {
-  apiKey: "PUT_YOUR_API_KEY_HERE",
-  authDomain: "PUT_YOUR_AUTH_DOMAIN_HERE",
-  projectId: "PUT_YOUR_PROJECT_ID_HERE",
-  storageBucket: "PUT_YOUR_STORAGE_BUCKET_HERE",
-  messagingSenderId: "PUT_YOUR_SENDER_ID_HERE",
-  appId: "PUT_YOUR_APP_ID_HERE"
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBCRByb1tXpAfU6xb7FzEtzymbRNWDoVZA",
+  authDomain: "heal-chat-14559.firebaseapp.com",
+  projectId: "heal-chat-14559",
+  storageBucket: "heal-chat-14559.firebasestorage.app",
+  messagingSenderId: "172225078927",
+  appId: "1:172225078927:web:f04d6d4debc1cc2260b2fa",
+  measurementId: "G-G8QCTBCX51"
 };
 
 // ถ้าอยากปรับข้อความ/ชื่อผู้สร้างในระบบ
