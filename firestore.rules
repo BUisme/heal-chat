@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ✅ ใส่ UID ของผู้สร้างตรงนี้
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == "ADMIN_UID_HERE";
+    }
+
+    function isOwner(threadId) {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/threads/$(threadId))
+        && get(/databases/$(database)/documents/threads/$(threadId)).data.ownerUid == request.auth.uid;
+    }
+
+    match /threads/{threadId} {
+      // อ่านได้: เจ้าของห้อง หรือ ผู้สร้าง
+      allow read: if isAdmin() || isOwner(threadId);
+
+      // สร้างห้อง: ต้องล็อกอินแล้ว (anonymous ก็ได้) และ ownerUid ต้องตรงกับคนสร้าง
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid;
+
+      // อัปเดตข้อมูลห้อง: เจ้าของห้องอัปเดตได้บางฟิลด์ / ผู้สร้างอัปเดตได้ทั้งหมด
+      allow update: if isAdmin()
+        || (isOwner(threadId)
+            && request.resource.data.ownerUid == resource.data.ownerUid);
+
+      // ไม่อนุญาตลบผ่าน client
+      allow delete: if false;
+
+      match /messages/{messageId} {
+        // อ่านได้: เจ้าของห้อง หรือ ผู้สร้าง
+        allow read: if isAdmin() || isOwner(threadId);
+
+        // สร้างข้อความ:
+        // - เจ้าของห้องส่งได้เฉพาะ sender="visitor"
+        // - ผู้สร้างส่งได้เฉพาะ sender="creator"
+        allow create: if request.auth != null
+          && (
+            (isOwner(threadId) && request.resource.data.sender == "visitor")
+            || (isAdmin() && request.resource.data.sender == "creator")
+          );
+
+        allow update, delete: if false;
+      }
+    }
+  }
+}
