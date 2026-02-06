@@ -1,7 +1,6 @@
-// ✅ วาง Firebase config ของโปรเจกต์คุณตรงนี้ (หาได้ที่ Firebase console → Project settings → Your apps)
-// หมายเหตุ: firebaseConfig "ไม่ใช่ความลับ" แต่ Firestore Rules ต้องตั้งให้ดีเพื่อความปลอดภัย
+// ✅ วาง Firebase config ของโปรเจกต์คุณตรงนี้
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBCRByb1tXpAfU6xb7FzEtzymbRNWDoVZA",
   authDomain: "heal-chat-14559.firebaseapp.com",
   projectId: "heal-chat-14559",
