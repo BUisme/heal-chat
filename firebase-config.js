@@ -1,4 +1,5 @@
 // ✅ วาง Firebase config ของโปรเจกต์คุณตรงนี้
+// หมายเหตุ: firebaseConfig "ไม่ใช่ความลับ" แต่ Firestore Rules ต้องตั้งให้ดีเพื่อความปลอดภัย
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
   apiKey: "AIzaSyBCRByb1tXpAfU6xb7FzEtzymbRNWDoVZA",
